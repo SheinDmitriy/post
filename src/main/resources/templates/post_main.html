@@ -8,7 +8,39 @@
 <H1>Почтовые отправления</H1>
 
 <form th:action="@{/form}" th:object="${liter}" method="post">
+    <table>
+        <tr>
+            <td>ШПИ</td><td> <input type="text" th:field="*{shpi}" style="width: 350px"></td>
+        </tr>
+        <tr>
+            <td>Индекс</td><td> <input type="text" th:field="*{index}" style="width: 350px"></td>
+        </tr>
+        <tr>
+            <td>Регион</td><td> <input type="text" th:field="*{region}" style="width: 350px"></td>
+        </tr>
+        <tr>
+            <td>Область</td><td> <input type="text" th:field="*{area}" style="width: 350px"></td>
+        </tr>
+        <tr>
+            <td>Город</td><td> <input type="text" th:field="*{city}" style="width: 350px"></td>
+        </tr>
+        <tr>
+            <td>Улица</td><td> <input type="text" th:field="*{street}" style="width: 350px"></td>
+        </tr>
+    </table>
 
+    <p>Дом <input type="text" th:field="*{house}" style="width: 30px">&nbsp &nbsp
+        Литер <input type="text" th:field="*{litter}" style="width: 30px">&nbsp &nbsp
+        Корпус <input type="text" th:field="*{corpus}" style="width: 30px">&nbsp &nbsp
+        Квартира <input type="text" th:field="*{room}" style="width: 30px">&nbsp &nbsp
+    </p>
+    <p>
+        Кому <input type="text" th:field="*{adresat}"  style="width: 370px">
+    </p>
+    <p>
+        Комментарий <input type="text" th:field="*{comment}"  style="width: 310px">
+    </p>
+    <button type="submit" >Добавить</button>
 </form>
 
 </body>

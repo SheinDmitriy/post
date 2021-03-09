@@ -7,9 +7,9 @@ public class Liter {
 
     private String shpi;
     private String index;
-    private String country;
-    private String addresstype;
-    private String numaddresstype;
+//    private String country;
+//    private String addresstype;
+//    private String numaddresstype;
     private String region;
     private String area;
     private String city;
@@ -21,9 +21,9 @@ public class Liter {
     private String adresat;
     private String mass;
     private String price;
-    private String payment;
+//    private String payment;
     private String comment;
-    private String teladdress;
-    private String numContract;
-    private String smsnoticre;
+//    private String teladdress;
+//    private String numContract;
+//    private String smsnoticre;
 }
