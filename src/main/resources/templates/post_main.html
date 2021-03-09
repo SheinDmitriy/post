@@ -1,10 +1,15 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Post</title>
 </head>
 <body>
+<H1>Почтовые отправления</H1>
+
+<form th:action="@{/form}" th:object="${liter}" method="post">
+
+</form>
 
 </body>
 </html>
