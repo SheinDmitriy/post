@@ -3,17 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <title>Post</title>
+    <link rel="stylesheet" type="text/css" href="./style.css" >
 </head>
 <body>
 <H1>Почтовые отправления</H1>
 
-<form th:action="@{/form}" th:object="${liter}" method="post">
+<form th:action="@{/add}" th:object="${liter}" method="post">
     <table>
         <tr>
-            <td>ШПИ</td><td> <input type="text" th:field="*{shpi}" style="width: 350px"></td>
+            <td>ШПИ</td><td> <input type="text" maxlength="6" th:field="*{shpi}" style="width: 350px" ></td>
         </tr>
         <tr>
-            <td>Индекс</td><td> <input type="text" th:field="*{index}" style="width: 350px"></td>
+            <td>Индекс</td><td> <input type="text" maxlength="6" th:field="*{index}" style="width: 350px"></td>
         </tr>
         <tr>
             <td>Регион</td><td> <input type="text" th:field="*{region}" style="width: 350px"></td>
@@ -38,10 +39,61 @@
         Кому <input type="text" th:field="*{adresat}"  style="width: 370px">
     </p>
     <p>
-        Комментарий <input type="text" th:field="*{comment}"  style="width: 310px">
+        Комментарий <textarea type="text" th:field="*{comment}"  style="width: 310px; height: 50px"></textarea>
     </p>
     <button type="submit" >Добавить</button>
+   &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+
 </form>
+
+
+
+<div >
+    <table class="demotable">
+        <thead>
+        <tr>
+            <th>№</th>
+            <th style="width: 65px">ШПИ</th>
+            <th style="width: 65px">Индекс</th>
+            <th>Регион</th>
+            <th>Область</th>
+            <th>Город</th>
+            <th>Улица</th>
+            <th>Дом</th>
+            <th>Литер</th>
+            <th>Корпус</th>
+            <th>Квартира</th>
+            <th>Кому</th>
+            <th>Комментарий</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="oliter : ${liters}">
+            <td th:text="${oliter.getShpi()}" ></td>
+            <td th:text="${oliter.getIndex()}" ></td>
+            <td th:text="${oliter.getRegion()}" ></td>
+            <td th:text="${oliter.getArea()}" ></td>
+            <td th:text="${oliter.getCity()}" ></td>
+            <td th:text="${oliter.getStreet()}" ></td>
+            <td th:text="${oliter.getHouse()}" ></td>
+            <td th:text="${oliter.getLitter()}" ></td>
+            <td th:text="${oliter.getCorpus()}" ></td>
+            <td th:text="${oliter.getRoom()}" ></td>
+            <td th:text="${oliter.getAdresat()}" ></td>
+            <td th:text="${oliter.getComment()}" ></td>
+            <td>
+                <form th:action="@{/remove/{shpi} (shpi = ${oliter.getShpi()})}" method="post">
+                    <button type="submit" >Удалить</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <form th:action="@{/clear}" method="post">
+        <button type="submit" >Очистить</button>
+    </form>
+</div>
 
 </body>
 </html>
