@@ -48,4 +48,9 @@ public class PostController {
         literService.clear();
         return "redirect:/";
     }
+    @PostMapping("/submit")
+    public String submit(Model model) {
+        literService.create();
+        return "redirect:/";
+    }
 }

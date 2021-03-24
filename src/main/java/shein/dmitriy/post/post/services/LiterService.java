@@ -43,4 +43,8 @@ public class LiterService {
     public void clear() {
         literList.clear();
     }
+
+    public void create() {
+        System.out.println(literList.size());
+    }
 }
