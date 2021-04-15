@@ -1,6 +1,5 @@
 package shein.dmitriy.post.post.util;
 
-import org.apache.poi.hssf.usermodel.HSSFCellStyle;
 import org.apache.poi.hssf.usermodel.HSSFFont;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
@@ -15,9 +14,12 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.List;
 
+import static org.apache.poi.ss.usermodel.HorizontalAlignment.*;
+
 @Service
 public class ExcelUtil {
     private static HSSFWorkbook workbook = new HSSFWorkbook();
+    private static HSSFSheet sheet = workbook.createSheet("list");
     private CurrDate currDate;
 
     @Autowired
@@ -26,8 +28,6 @@ public class ExcelUtil {
     }
 
     public void create(List<Liter> literList) {
-
-
 
         create103_part1(literList);
 
@@ -47,17 +47,24 @@ public class ExcelUtil {
 
     private static void createStyleForCell(Cell cell) {
         HSSFFont font = workbook.createFont();
-        HSSFCellStyle style = workbook.createCellStyle();
-        font.setFontHeight((short) 160);
+        CellStyle style = workbook.createCellStyle();
+        font.setFontHeight((short) 140);
         style.setFont(font);
         cell.setCellStyle(style);
 
     }
 
     private void create103_part1(List<Liter> literList) {
-        HSSFSheet sheet = workbook.createSheet("list");
-        HSSFFont font = workbook.createFont();
-        HSSFCellStyle style = workbook.createCellStyle();
+
+        sheet.setColumnWidth(0, 1750);
+        sheet.setColumnWidth(1, 14364);
+        sheet.setColumnWidth(2, 4265);
+        sheet.setColumnWidth(3, 2515);
+        sheet.setColumnWidth(4, 2770);
+        sheet.setColumnWidth(5, 2770);
+        sheet.setColumnWidth(6, 2770);
+        sheet.setColumnWidth(7, 2770);
+        sheet.setColumnWidth(8, 5832);
 
         Row row;
         Cell cell;
@@ -66,6 +73,7 @@ public class ExcelUtil {
         row = sheet.createRow(0);
         cell = row.createCell(7, CellType.STRING);
         cell.setCellValue("Приложение № 4");
+//        cell.setCellStyle(style);
         createStyleForCell(cell);
         //Row 2
         // Cell 7
@@ -96,30 +104,69 @@ public class ExcelUtil {
         row = sheet.createRow(7);
         cell = row.createCell(2, CellType.STRING);
         cell.setCellValue("СПИСОК №");
-        font.setFontHeight((short) 200);
-        font.setBold(true);
-        style.setFont(font);
-        style.setAlignment(HorizontalAlignment.RIGHT);
-        cell.setCellStyle(style);
-        //Cell 3
-        cell = row.createCell(3, CellType.STRING);
-        cell.setCellValue("1");
-        font.setFontHeight((short) 200);
-        font.setBold(true);
-        style.setFont(font);
-        style.setAlignment(HorizontalAlignment.CENTER);
-        cell.setCellStyle(style);
+        createStyleForCell(cell);
+        setFontBold(cell);
+        setCellAlign(cell, "right");
         //Cell 4
         cell = row.createCell(4, CellType.STRING);
         cell.setCellValue("(дополнительный)");
-        createStyleForCell(cell);
         //Cell 8
         cell = row.createCell(8, CellType.STRING);
         cell.setCellValue("ф.103");
-        font.setFontHeight((short) 160);
+        setCellAlign(cell, "center");
+        //Row 8
+        //Cell 1
+        row = sheet.createRow(8);
+        cell = row.createCell(2, CellType.STRING);
+        cell.setCellValue("внутрених почтовых отправлений");
+        createStyleForCell(cell);
+        setFontBold(cell);
+        //Row 8
+        //Cell 1
+        row = sheet.createRow(9);
+        cell = row.createCell(1, CellType.STRING);
+        cell.setCellValue("от");
+        createStyleForCell(cell);
+        setCellAlign(cell, "right");
+        //Cell 2
+        cell = row.createCell(2, CellType.STRING);
+        cell.setCellValue(currDate.getDate());
+        createStyleForCell(cell);
+        setBorderBottom(cell);
+        setCellAlign(cell, "center");
+    }
+
+    private void setBorderBottom(Cell cell) {
+        CellStyle style ;
+        style = cell.getCellStyle();
+        style.setBorderBottom(BorderStyle.THIN);
+        cell.setCellStyle(style);
+    }
+
+    private void setFontBold(Cell cell){
+        HSSFFont font = workbook.createFont();
+        CellStyle style ;
+        style = cell.getCellStyle();
         font.setBold(true);
         style.setFont(font);
         cell.setCellStyle(style);
+    }
 
+    private void setCellAlign(Cell cell, String aling){
+
+        CellStyle style ;
+        style = cell.getCellStyle();
+        switch (aling){
+            case "left":
+                style.setAlignment(LEFT);
+                break;
+            case "right":
+                style.setAlignment(RIGHT);
+                break;
+            case "center":
+                style.setAlignment(CENTER);
+                break;
+        }
+        cell.setCellStyle(style);
     }
 }

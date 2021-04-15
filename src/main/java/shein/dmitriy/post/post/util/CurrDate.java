@@ -9,7 +9,7 @@ import java.util.Date;
 public class CurrDate {
 
     public String getDate() {
-        SimpleDateFormat formatter= new SimpleDateFormat("dd-MM-yyyy");
+        SimpleDateFormat formatter= new SimpleDateFormat("dd.MM.yyyy");
         Date date = new Date(System.currentTimeMillis());
         return formatter.format(date);
     }
