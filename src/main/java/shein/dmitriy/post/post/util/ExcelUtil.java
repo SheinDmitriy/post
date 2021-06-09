@@ -136,9 +136,10 @@ public class ExcelUtil {
         setCellAlign(cell, "center");
     }
 
-    private void setBorderBottom(Cell cell) {
+    private void setBorderBottom(Cell cell, String align) {
         CellStyle style ;
         style = cell.getCellStyle();
+        switch ()
         style.setBorderBottom(BorderStyle.THIN);
         cell.setCellStyle(style);
     }
